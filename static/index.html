@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script async defer type="text/javascript">
+      fetch('http://localhost:3012/artists')
+        .then((response) => response.json())
+        .then((artists) => {
+          document.getElementById("main").innerHTML = artists[0].name + ", " + artists[1].name;
+        })
+        .catch((error) => {
+          console.error(`Запит не виконано: ${error.toString()}`);
+        });
+    </script>
+  </head>
+  <body>
+    <div id="main">
+    </div>
+  </body>
+</html>
