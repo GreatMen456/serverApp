@@ -1,11 +1,11 @@
-var express = require ('express');
-var bodyParser = require ('body-parser');
-var MongoClient = require('mongodb').MongoClient;
-var ObjectID = require('mongodb').ObjectID;
-var db = require('./db');
-var artistsController = require('./controllers/artists');
+const express = require ('express');
+const bodyParser = require ('body-parser');
+const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
+const db = require('./db');
+const artistsController = require('./controllers/artists');
 
-var app = express();
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

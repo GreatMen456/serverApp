@@ -3,11 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script async defer type="text/javascript">
+    const input = 'MONATIK'
       fetch('http://localhost:3012/artists')
         .then((response) => response.json())
         .then((artists) => {
-          document.getElementById("main").innerHTML = artists[0].name + ", " + artists[1].name;
+          for (let artist of artists)
+          {
+            if (artist.name == input) {
+              document.getElementById("main").innerHTML = artist.name +  '<br/>'+ artist.age + '<br/>' + artist.nationality + '<br/>' + artist.styleOfMusic;
+            break;
+            }
+          }
         })
         .catch((error) => {
           console.error(`Запит не виконано: ${error.toString()}`);
@@ -15,7 +24,9 @@
     </script>
   </head>
   <body>
-    <div id="main">
+    <div id="container">
+      <div id="main">
+      </div>
     </div>
   </body>
 </html>

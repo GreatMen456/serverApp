@@ -1,4 +1,4 @@
-var Artists = require('../models/artists');
+const Artists = require('../models/artists');
 
 exports.all = (req, res) => {
   Artists.all(function (err, docs) {
@@ -21,8 +21,11 @@ exports.findById = (req, res) => {
 }
 
 exports.create = (req, res) => {
-  var artist = {
-    name: req.body.name
+  const artist = {
+    name: req.body.name,
+    age: req.body.age,
+    nationality: req.body.nationality,
+    styleOfMusic: req.body.styleOfMusic
   };
   Artists.create(artist, function (err, result) {
     if (err) {
@@ -35,7 +38,13 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  Artists.update(req.params.id, {$set:{name: req.body.name}}, function (err, result) {
+  const new_list = {
+    name: req.body.name,
+    age: req.body.age,
+    nationality: req.body.nationality,
+    styleOfMusic: req.body.styleOfMusic
+  }
+  Artists.update(req.params.id, {$set:new_list}, function (err, result) {
     if (err) {
       console.log(err);
       return res.sendStatus(500);

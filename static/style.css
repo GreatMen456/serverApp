@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,900');
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  min-height: 100vh;
+  font-family: "Lato", sans-serif;
+  background-color: whitesmoke;
+}
+
+#container{
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+  margin: 12px auto;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 0.8em;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 30px 18px -24px;
+}
+
+#main{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 400px;
+}
+@media (min-width: 600px) {
+  #main {
+    flex-direction: row;
+  }
+}

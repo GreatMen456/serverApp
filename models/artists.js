@@ -1,5 +1,5 @@
-var db = require('../db');
-var ObjectID = require('mongodb').ObjectID;
+const db = require('../db');
+const ObjectID = require('mongodb').ObjectID;
 
 exports.all = (cb) => {
   db.get().collection('artists').find().toArray(function (err, docs) {
