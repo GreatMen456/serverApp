@@ -5,28 +5,72 @@
     <title></title>
     <link rel="stylesheet" href="style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script async defer type="text/javascript">
-    const input = 'MONATIK'
-      fetch('http://localhost:3012/artists')
-        .then((response) => response.json())
-        .then((artists) => {
-          for (let artist of artists)
-          {
-            if (artist.name == input) {
-              document.getElementById("main").innerHTML = artist.name +  '<br/>'+ artist.age + '<br/>' + artist.nationality + '<br/>' + artist.styleOfMusic;
-            break;
-            }
-          }
-        })
-        .catch((error) => {
-          console.error(`Запит не виконано: ${error.toString()}`);
-        });
-    </script>
+
   </head>
   <body>
     <div id="container">
-      <div id="main">
+      <div class="main" id="main">
       </div>
+      <input class="movie__search" id="movie-search" type="text" placeholder="Enter a movie title"/>
     </div>
+
+    <script async defer type="text/javascript">
+    const input = document.getElementById('movie-search');
+    const artistData = document.getElementById("main");
+    const defaultTitle = 'АНТИТІЛА';
+    const artistDataTpl = (artiste) => {
+      let songs = artiste.hits.split(',');
+      return `
+      <div class="artist__poster">
+      <span class="artist__poster--fill">
+        <img src="${artiste.avatar}" />
+      </span>
+      <span class="artist__poster--featured">
+        <img src="${artiste.avatar}" />
+      </span>
+    </div>
+        <div class="artist__details">
+          <h1>${artiste.name}</h1>
+          <p>${artiste.about}</p>
+          <p><b>Роки: </b>${artiste.age}</p>
+          <p><b>Країна: </b>${artiste.nationality}</p>
+          <p><b>Стиль: </b>${artiste.styleOfMusic}</p>
+          <p><b>Хіти:</b></p>
+          <ul class="movie__actors list--inline">
+          ${songs.map(song => `<li>${song}</li>`).join(' ')}
+        </ul>
+        </div>
+      `;
+    }
+
+    const noResultsTpl = () => {
+      return `
+        <div class="artist__no-results">
+          <h2>No results</div>
+        </div>
+      `;
+      };
+
+    const findArtist = (input) => {
+      fetch(`http://localhost:3012/artists?q=${input}`)
+        .then((response) => response.json())
+        .then((artists) => {
+          const artist = artists[0];
+          if (artist) {
+            artistData.innerHTML = artistDataTpl(artist);
+          } else {
+            artistData.innerHTML = noResultsTpl();
+          }
+        })
+        .catch((error) => {
+          artistData.innerHTML = noResultsTpl();
+        });
+      }
+      window.onload = findArtist(defaultTitle);
+      input.addEventListener('keypress', (e) => {
+        if (e.keyCode === 13 && input.value) findArtist(input.value.toUpperCase());
+      });
+    </script>
+
   </body>
 </html>

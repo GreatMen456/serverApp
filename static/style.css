@@ -13,6 +13,26 @@ body {
   background-color: whitesmoke;
 }
 
+h1, h2, p, ul {
+  line-height: 1.2;
+}
+h1:not(:last-child), h2:not(:last-child), p:not(:last-child), ul:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+p, li {
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+p + ul {
+  margin-top: -10px;
+}
+
+h1, h2, strong {
+  font-weight: 900;
+}
+
 #container{
   background-color: white;
   position: relative;
@@ -24,7 +44,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.2) 0 30px 18px -24px;
 }
 
-#main{
+.main{
   position: relative;
   display: flex;
   flex-direction: column;
@@ -35,4 +55,113 @@ body {
   #main {
     flex-direction: row;
   }
+}
+.artist__poster {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+@media (min-width: 600px) {
+  .artist__poster {
+    margin-right: 12px;
+    width: 200px;
+  }
+}
+.artist__poster--fill {
+  position: absolute;
+  overflow: hidden;
+  top: -80%;
+  bottom: -20%;
+  left: -20%;
+  width: 150%;
+  height: 150%;
+  -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
+}
+@media (min-width: 600px) {
+  .artist__poster--fill {
+    top: -20%;
+    width: 100%;
+  }
+}
+.artist__poster--fill img {
+  filter: blur(6px);
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* transform: scale(1.4); */
+}
+.artist__poster--featured {
+  position: relative;
+  align-self: center;
+  overflow: hidden;
+  margin-top: 84px;
+  margin-left: 24px;
+  width: 140px;
+  background-color: gainsboro;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0 6px 12px -6px;
+  z-index: 1;
+}
+@media (min-width: 600px) {
+  .artist__poster--featured {
+    left: 56px;
+    margin: auto;
+  }
+}
+.artist__poster--featured img {
+  width: 140px;
+  vertical-align: middle;
+}
+.artist__poster--featured img[src="N/A"] {
+  min-height: 206px;
+  opacity: 0;
+}
+.artist__details {
+  flex: 1;
+  padding: 24px;
+}
+@media (min-width: 600px) {
+  .artist__details {
+    padding: 72px;
+  }
+}
+
+.list--inline{
+  padding: 0;
+}
+.list--inline li {
+  display: inline-block;
+}
+.list--inline li:not(:last-child) {
+  margin-right: 12px;
+}
+
+input {
+  padding: 6px;
+  font-family: $font-body;
+  font-size: 16px;
+  border: 1px solid gainsboro;
+  border-radius: 2px;
+  -webkit-appearance: none;
+}
+
+.movie__search {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  margin: auto;
+  width: calc(100% - (12px * 4));
+}
+@media (min-width: 400px) {
+  .movie__search {
+    max-width: 200px;
+  }
+}
+
+.artist__no-results {
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  text-align: center;
 }

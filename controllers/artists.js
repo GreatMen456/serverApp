@@ -1,7 +1,7 @@
 const Artists = require('../models/artists');
 
 exports.all = (req, res) => {
-  Artists.all(function (err, docs) {
+  Artists.all(req.query.q, function (err, docs) {
     if (err) {
       console.log(err);
       return res.sendStatus(500);
@@ -23,9 +23,12 @@ exports.findById = (req, res) => {
 exports.create = (req, res) => {
   const artist = {
     name: req.body.name,
+    avatar: req.body.avatar,
+    about: req.body.about,
     age: req.body.age,
     nationality: req.body.nationality,
-    styleOfMusic: req.body.styleOfMusic
+    styleOfMusic: req.body.styleOfMusic,
+    hits: req.body.hits
   };
   Artists.create(artist, function (err, result) {
     if (err) {
@@ -40,9 +43,12 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   const new_list = {
     name: req.body.name,
+    avatar: req.body.avatar,
+    about: req.body.about,
     age: req.body.age,
     nationality: req.body.nationality,
-    styleOfMusic: req.body.styleOfMusic
+    styleOfMusic: req.body.styleOfMusic,
+    hits: req.body.hits
   }
   Artists.update(req.params.id, {$set:new_list}, function (err, result) {
     if (err) {

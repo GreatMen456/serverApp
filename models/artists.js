@@ -1,8 +1,10 @@
 const db = require('../db');
 const ObjectID = require('mongodb').ObjectID;
 
-exports.all = (cb) => {
-  db.get().collection('artists').find().toArray(function (err, docs) {
+exports.all = (q, cb) => {
+  db.get().collection('artists').find({
+    name: { $regex: `.*${q}.*` }
+  }).toArray(function (err, docs) {
     cb(err, docs);
   })
 }
