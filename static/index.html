@@ -16,6 +16,7 @@
 
     <script async defer type="text/javascript">
     const input = document.getElementById('movie-search');
+    const my = document.getElementById('hits');
     const artistData = document.getElementById("main");
     const defaultTitle = 'АНТИТІЛА';
     const artistDataTpl = (artiste) => {
@@ -45,12 +46,41 @@
 
     const noResultsTpl = () => {
       return `
-        <div class="artist__no-results">
-          <h2>No results</div>
+        <div id="colArt">
+          <div class="artist__no-results">
+            <p>Ім'я': <input type="text" name="name" id="name"></p>
+            <p>Опис: <input type="text" name="about" id="about"></p>
+            <p>Аватар: <input type="text" name="avatar" id="avatar"></p>
+            <p>Вік: <input type="text" name="age" id="age"></p>
+            <p>Країна: <input type="text" name="nationality" id="nationality"></p>
+            <p>Стиль музики: <input type="text" name="styleOfMusic" id="styleOfMusic"></p>
+            <p>Хіти: <input type="text" name="hits" id="hits"></p>
+          </div>
+            <button type="submit" id="submitbutton" onclick="makeArt()">Register</button>
         </div>
       `;
       };
+    const makeArt = () => {
 
+      let content = {
+        name: document.getElementById('name').value,
+        about: document.getElementById('about').value,
+        avatar: document.getElementById('avatar').value,
+        age: document.getElementById('age').value,
+        nationality: document.getElementById('nationality').value,
+        styleOfMusic: document.getElementById('styleOfMusic').value,
+        hits: document.getElementById('hits').value
+      };
+      console.log(content);
+      fetch('http://localhost:3012/artists', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(content)
+      });
+      findArtist(defaultTitle);
+    }
     const findArtist = (input) => {
       fetch(`http://localhost:3012/artists?q=${input}`)
         .then((response) => response.json())
@@ -64,6 +94,7 @@
         })
         .catch((error) => {
           artistData.innerHTML = noResultsTpl();
+
         });
       }
       window.onload = findArtist(defaultTitle);

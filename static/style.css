@@ -160,8 +160,23 @@ input {
 }
 
 .artist__no-results {
-  align-self: center;
-  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   text-align: center;
+}
+  #submitbutton{
+    margin-top: 150px;
+    margin-left: 50px;
+    width: 200px;
+    height: 100px;
+    background-image: url(https://hacks.mozilla.org/files/2017/06/omega.jpg);
+    clip-path: ellipse(50% 50%);
+    font-style: italic;
+}
+  #colArt{
+    display: flex;
+    flex-direction: row;
 }
