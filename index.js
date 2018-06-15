@@ -29,7 +29,7 @@ db.connect('mongodb://localhost:27017', function (err) {
   if (err) {
     return console.log(err);
   }
-  app.listen(3012, function () {
+  app.listen(process.env.PORT || 3012), function () {
     console.log('API app started http://localhost:3012');
   })
 })

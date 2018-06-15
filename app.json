@@ -1,0 +1,6 @@
+{
+  "name": "api",
+  "description": "An App for finding some artists",
+  "repository": "https://github.com/GreatMen456/serverApp.git",
+  "keywords": ["node", "express"]
+}
